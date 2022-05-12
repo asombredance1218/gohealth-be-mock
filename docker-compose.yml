@@ -1,0 +1,10 @@
+services:
+  postgres:
+    platform: linux/x86_64
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: monogram
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
