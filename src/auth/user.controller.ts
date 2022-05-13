@@ -1,5 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { UserCreatePayload } from './auth.dto';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { LoginPayload, UserCreatePayload } from './auth.dto';
 import { AuthService } from './auth.service';
 import { User } from '@prisma/client';
 
@@ -13,5 +13,10 @@ export class UserController {
     // noinspection PointlessArithmeticExpressionJS
     payload.region_id = payload.region_id * 1;
     return await this.authService.createUser(payload);
+  }
+
+  @Post('login')
+  async login(@Body() payload: LoginPayload) {
+    return this.authService.login(payload.username, payload.password);
   }
 }
